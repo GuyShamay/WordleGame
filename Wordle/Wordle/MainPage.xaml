@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wordle.MainPage"
+             xmlns:Model="clr-namespace:Wordle.Model"
+             xmlns:viewmodel="clr-namespace:Wordle.ViewModel"
+             x:DataType="viewmodel:WordleViewModel">
+
+
+    <Grid RowDefinitions="450, *"
+          Padding="8,12,8,12">
+
+        <!--Game field-->
+        <StackLayout Orientation="Vertical"
+            Spacing="8"
+            BindableLayout.ItemsSource="{Binding Rows}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="Model:Word">
+                    <StackLayout Orientation="Horizontal" 
+                        Spacing="8"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Letters}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="Model:Letter">
+                                <Frame BackgroundColor="{Binding Color}"
+                                       BorderColor="Black" Padding="0">
+                                    <Label Text="{Binding Value}" HeightRequest="65"
+                                           FontSize="25" WidthRequest="60"
+                                           HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center" VerticalTextAlignment="Center" />
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+        <!--Game field-->
+
+        <!--Keyboard-->
+        <StackLayout Orientation="Vertical"
+                     Grid.Row="1" Spacing="2">
+            <StackLayout Orientation="Horizontal" 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Keyboard1}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="Model:Letter">
+                        <Button Text="{Binding Value}" WidthRequest="33" FontSize="14" HeightRequest="60" 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WordleViewModel}}, Path=AddLetterCommand}"
+                                CommandParameter="{Binding .}" BackgroundColor="{Binding Color}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Keyboard2}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="Model:Letter">
+                        <Button Text="{Binding Value}" WidthRequest="33" FontSize="14" HeightRequest="60" 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WordleViewModel}}, Path=AddLetterCommand}"
+                                CommandParameter="{Binding .}" BackgroundColor="{Binding Color}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Keyboard3}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="Model:Letter">
+                        <Button Text="{Binding Value}" WidthRequest="33" FontSize="14" HeightRequest="60" 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WordleViewModel}}, Path=AddLetterCommand}"
+                                CommandParameter="{Binding .}" BackgroundColor="{Binding Color}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            <Button Text="Enter" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WordleViewModel}}, Path=EnterCommand}" WidthRequest="60"/>
+        </StackLayout>
+        <!--Keyboard-->
+    </Grid>
+
+</ContentPage>
